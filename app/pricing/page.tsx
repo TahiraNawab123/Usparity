@@ -1,7 +1,7 @@
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
-import { PricingSection } from "@/components/sections/pricing-section"
-import { FAQSection } from "@/components/sections/faq-section"
+import { Header } from "../../components/layout/header"
+import { Footer } from "../../components/layout/footer"
+import { PricingSection } from "../../components/sections/pricing-section"
+import { FAQSection } from "../../components/sections/faq-section"
 
 export const metadata = {
   title: "Pricing Plans - Usparity",

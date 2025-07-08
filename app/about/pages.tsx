@@ -1,6 +1,6 @@
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
-import { AboutPageSection } from "@/components/sections/about-page-section"
+import { Header } from "../../components/layout/header"
+import { Footer } from "../../components/layout/footer"
+import { AboutPageSection } from "../../components/sections/about-page-section"
 
 export const metadata = {
   title: "About Us - Usparity",

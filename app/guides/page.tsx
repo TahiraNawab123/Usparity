@@ -1,6 +1,6 @@
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
-import { ContentGuidesSection } from "@/components/sections/content-guides-section"
+import { Header } from "../../components/layout/header"
+import { Footer } from "../../components/layout/footer"
+import { ContentGuidesSection } from "../../components/sections/content-guides-section"
 
 export const metadata = {
   title: "Content Guides - Usparity",

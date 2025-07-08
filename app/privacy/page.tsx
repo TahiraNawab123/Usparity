@@ -1,6 +1,6 @@
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
-import { PrivacyPolicySection } from "@/components/sections/privacy-policy-section"
+import { Header } from "../../components/layout/header"
+import { Footer } from "../../components/layout/footer"
+import { PrivacyPolicySection } from "../../components/sections/privacy-policy-section"
 
 export const metadata = {
   title: "Privacy Policy - Usparity",
