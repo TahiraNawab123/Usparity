@@ -1,7 +1,6 @@
 import { Header } from "../../components/layout/header"
 import { Footer } from "../../components/layout/footer"
-// Update the import path below if the file name or location is different, e.g. help-center-section.tsx or HelpCenterSection.tsx
-import { HelpCenterSection } from "../../components/sections/help-center-section"
+import { HelpCenterSection } from "../../components/sections/help-centre-section"
 
 export const metadata = {
   title: "Help Center - Usparity",

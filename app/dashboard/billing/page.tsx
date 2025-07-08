@@ -1,5 +1,5 @@
-import { DashboardLayout } from "../../components/dashboard/dashboard-layout"
-import { BillingSection } from "../../components/dashboard/billing-section"
+import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
+import { BillingSection } from "@/components/dashboard/billing-section"
 
 export const metadata = {
   title: "Billing - Usparity",
