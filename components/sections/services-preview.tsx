@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { PenTool, Search, TrendingUp, Zap } from "lucide-react"
+import { PenTool, Search, TrendingUp, Zap, ArrowRight } from "lucide-react"
 
 export function ServicesPreview() {
   const router = useRouter()
@@ -59,41 +59,41 @@ export function ServicesPreview() {
   }
 
   return (
-    <section className="section-spacing bg-white">
+    <section className="section-spacing bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <div className="text-center content-spacing">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Premium Services</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Our Premium Services</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             From content writing to digital marketing, we provide comprehensive solutions to elevate your brand&rsquo;s
             online presence.
           </p>
         </div>
 
         {/* Service cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
           {services.map((service, idx) => (
             <div key={idx} className="block h-full">
-              <Card className="relative group hover:shadow-lg transition-all duration-300 border-2 hover:border-purple-200 cursor-pointer h-full hover-lift">
+              <Card className="card h-full group cursor-pointer">
                 <CardHeader>
-                  <div className="w-12 h-12 deep-gradient rounded-lg flex items-center justify-center mb-4 group-hover:shadow-md transition-all">
+                  <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center mb-4 group-hover:shadow-lg transition-all">
                     <service.icon className="w-6 h-6 text-white" />
                   </div>
-                  <CardTitle className="text-xl font-bold">{service.title}</CardTitle>
-                  <CardDescription className="text-gray-600">{service.description}</CardDescription>
+                  <CardTitle className="text-xl font-bold text-white">{service.title}</CardTitle>
+                  <CardDescription className="text-gray-300">{service.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col justify-between flex-1">
                   <ul className="space-y-2 mb-6 flex-1">
                     {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center text-sm text-gray-600">
-                        <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mr-3" />
+                      <li key={feature} className="flex items-center text-sm text-gray-300">
+                        <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mr-3" />
                         {feature}
                       </li>
                     ))}
                   </ul>
                   <Button
                     size="sm"
-                    className="deep-gradient text-white w-full font-semibold hover:opacity-90"
+                    className="btn-primary w-full font-semibold"
                     disabled={!service.available}
                     onClick={() => service.available && handleNavigation(service.href)}
                   >
@@ -106,14 +106,15 @@ export function ServicesPreview() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <Button
             size="lg"
             variant="outline"
-            className="px-8 bg-transparent hover-lift"
+            className="btn-secondary px-8"
             onClick={handleViewAllServices}
           >
             View All Services
+            <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>
       </div>

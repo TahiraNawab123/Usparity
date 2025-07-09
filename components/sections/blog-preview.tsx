@@ -39,18 +39,18 @@ export function BlogPreview() {
   ]
 
   return (
-    <section className="py-20 bg-white">
+    <section className="section-spacing bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">Latest from Our Blog</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Latest from Our Blog</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Stay updated with the latest trends, tips, and insights in content writing, SEO, and digital marketing.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
-            <Card key={index} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+            <Card key={index} className="card group overflow-hidden">
               <div className="aspect-video overflow-hidden">
                 <img
                   src={post.image || "/placeholder.svg"}
@@ -60,25 +60,25 @@ export function BlogPreview() {
               </div>
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-700">
+                  <Badge variant="secondary" className="bg-purple-900/20 text-purple-300 border-purple-700">
                     {post.category}
                   </Badge>
-                  <span className="text-sm text-gray-500">{post.readTime}</span>
+                  <span className="text-sm text-gray-400">{post.readTime}</span>
                 </div>
-                <CardTitle className="text-xl font-bold group-hover:text-purple-600 transition-colors">
+                <CardTitle className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
                   {post.title}
                 </CardTitle>
-                <CardDescription className="text-gray-600 leading-relaxed">{post.excerpt}</CardDescription>
+                <CardDescription className="text-gray-300 leading-relaxed">{post.excerpt}</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center text-sm text-gray-500 mb-4">
+                <div className="flex items-center text-sm text-gray-400 mb-4">
                   <User className="w-4 h-4 mr-2" />
                   <span className="mr-4">{post.author}</span>
                   <Calendar className="w-4 h-4 mr-2" />
                   <span>{new Date(post.date).toLocaleDateString()}</span>
                 </div>
                 <Link href={`/blog/${post.title.toLowerCase().replace(/\s+/g, "-")}`}>
-                  <Button variant="ghost" className="p-0 h-auto font-semibold text-purple-600 hover:text-purple-700">
+                  <Button variant="ghost" className="p-0 h-auto font-semibold text-purple-400 hover:text-purple-300">
                     Read More
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
@@ -90,8 +90,9 @@ export function BlogPreview() {
 
         <div className="text-center mt-12">
           <Link href="/blog">
-            <Button size="lg" variant="outline" className="px-8 bg-transparent">
+            <Button size="lg" variant="outline" className="btn-secondary px-8">
               View All Articles
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
         </div>

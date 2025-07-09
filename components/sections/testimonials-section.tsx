@@ -8,7 +8,7 @@ export function TestimonialsSection() {
       role: "Marketing Director",
       company: "TechStart Inc.",
       content:
-        "ContentCraft transformed our blog from zero to 50K monthly visitors in just 6 months. Their SEO-optimized content is exceptional.",
+        "Usparity transformed our blog from zero to 50K monthly visitors in just 6 months. Their SEO-optimized content is exceptional.",
       rating: 5,
       avatar: "/placeholder.svg?height=60&width=60",
     },
@@ -26,18 +26,18 @@ export function TestimonialsSection() {
       role: "Content Manager",
       company: "Digital Dynamics",
       content:
-        "Professional, reliable, and always on-brand. ContentCraft has become an essential part of our content strategy.",
+        "Professional, reliable, and always on-brand. Usparity has become an essential part of our content strategy.",
       rating: 5,
       avatar: "/placeholder.svg?height=60&width=60",
     },
   ]
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="section-spacing bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">What Our Clients Say</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Don't just take our word for it. Here's what our satisfied clients have to say about our premium content
             services.
           </p>
@@ -45,14 +45,14 @@ export function TestimonialsSection() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card key={index} className="card">
               <CardContent className="p-8">
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <blockquote className="text-gray-700 mb-6 leading-relaxed">"{testimonial.content}"</blockquote>
+                <blockquote className="text-gray-300 mb-6 leading-relaxed">"{testimonial.content}"</blockquote>
                 <div className="flex items-center">
                   <img
                     src={testimonial.avatar || "/placeholder.svg"}
@@ -60,8 +60,8 @@ export function TestimonialsSection() {
                     className="w-12 h-12 rounded-full mr-4"
                   />
                   <div>
-                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-sm text-gray-600">
+                    <div className="font-semibold text-white">{testimonial.name}</div>
+                    <div className="text-sm text-gray-400">
                       {testimonial.role}, {testimonial.company}
                     </div>
                   </div>

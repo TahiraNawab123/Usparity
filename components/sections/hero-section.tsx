@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, CheckCircle } from "lucide-react"
+import { ArrowRight, CheckCircle, Star } from "lucide-react"
 
 export function HeroSection() {
   const router = useRouter()
@@ -22,58 +22,56 @@ export function HeroSection() {
   }
 
   return (
-    <section className="hero-full-height deep-gradient-enhanced relative overflow-hidden">
-      {/* Enhanced Disco dots */}
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
+    <section className="min-h-screen gradient-bg-dark relative overflow-hidden flex items-center justify-center">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-2 h-2 bg-purple-400 rounded-full animate-float"></div>
+        <div className="absolute top-40 right-20 w-1 h-1 bg-blue-400 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-40 left-20 w-1.5 h-1.5 bg-purple-300 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-20 right-10 w-1 h-1 bg-blue-300 rounded-full animate-float" style={{ animationDelay: '3s' }}></div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8 animate-fade-in-up">
-            <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium mb-8 animate-fade-in-up border border-white/20">
+            <Star className="w-4 h-4 mr-2 text-yellow-400" />
             Premium Digital Solutions & Content Services
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight animate-fade-in-up">
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight animate-fade-in-up">
             Elevate Your Brand with{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">Usparity</span>
+            <span className="gradient-text">Usparity</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl lg:text-3xl text-white/90 mb-10 leading-relaxed max-w-4xl mx-auto animate-fade-in-up">
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-10 leading-relaxed max-w-3xl mx-auto animate-fade-in-up">
             We blend creativity, strategy, and AI-driven insights to deliver impactful digital solutions. Get
             high-quality content, digital marketing, and e-commerce support that drives results.
           </p>
 
           {/* Social Proof */}
-          <div className="flex flex-wrap justify-center items-center gap-8 mb-10 text-sm text-white/80 animate-fade-in-up">
-            <div className="flex items-center hover:text-white transition-colors">
-              <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
+          <div className="flex flex-wrap justify-center items-center gap-6 mb-10 text-sm text-gray-400 animate-fade-in-up">
+            <div className="flex items-center">
+              <CheckCircle className="w-4 h-4 text-green-400 mr-2" />
               500+ Happy Clients
             </div>
-            <div className="flex items-center hover:text-white transition-colors">
-              <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
+            <div className="flex items-center">
+              <CheckCircle className="w-4 h-4 text-green-400 mr-2" />
               10,000+ Articles Delivered
             </div>
-            <div className="flex items-center hover:text-white transition-colors">
-              <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
+            <div className="flex items-center">
+              <CheckCircle className="w-4 h-4 text-green-400 mr-2" />
               99% Client Satisfaction
             </div>
           </div>
 
-          {/* CTA Buttons - Moved slightly up */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up -mt-2">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up">
             <Button
               size="lg"
-              className="bg-white text-purple-900 hover:bg-gray-100 text-lg px-10 py-4 hover-lift font-semibold"
+              className="btn-primary text-lg px-8 py-4"
               onClick={handlePricingNavigation}
             >
               View Pricing Plans
@@ -82,7 +80,7 @@ export function HeroSection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-purple-900 text-lg px-10 py-4 hover-lift font-semibold bg-transparent"
+              className="btn-secondary text-lg px-8 py-4"
               onClick={handleServicesNavigation}
             >
               Explore Services

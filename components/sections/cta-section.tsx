@@ -22,9 +22,17 @@ export function CTASection() {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-r from-purple-600 to-purple-700">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 text-white text-sm font-medium mb-8">
+    <section className="section-spacing gradient-bg relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-10 left-10 w-2 h-2 bg-white/30 rounded-full animate-float"></div>
+        <div className="absolute top-20 right-20 w-1 h-1 bg-white/40 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-20 left-20 w-1.5 h-1.5 bg-white/30 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-10 right-10 w-1 h-1 bg-white/40 rounded-full animate-float" style={{ animationDelay: '3s' }}></div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8 border border-white/20">
           <Sparkles className="w-4 h-4 mr-2" />
           Ready to Transform Your Content?
         </div>
@@ -33,7 +41,7 @@ export function CTASection() {
           Ready to Elevate Your Brand with Usparity?
         </h2>
 
-        <p className="text-xl text-purple-100 mb-10 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
           Join businesses worldwide who trust Usparity with their digital growth. Get started with our premium services
           and watch your online presence soar.
         </p>
@@ -41,7 +49,7 @@ export function CTASection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
             size="lg"
-            className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8 py-4"
+            className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8 py-4 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             onClick={handlePricingNavigation}
           >
             Get Started Now
@@ -50,14 +58,14 @@ export function CTASection() {
           <Button
             variant="outline"
             size="lg"
-            className="border-white text-white hover:bg-white hover:text-purple-600 text-lg px-8 py-4 bg-transparent"
+            className="btn-secondary text-lg px-8 py-4"
             onClick={handleContactNavigation}
           >
             Schedule a Consultation
           </Button>
         </div>
 
-        <div className="mt-10 text-purple-200 text-sm">
+        <div className="mt-10 text-white/80 text-sm">
           <p>No setup fees • Cancel anytime • 30-day money-back guarantee</p>
         </div>
       </div>
