@@ -3,290 +3,235 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, Send, Calendar, CheckCircle } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Mail, Phone, MapPin, Clock, Send } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     subject: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { toast } = useToast()
 
-  const [showScheduleForm, setShowScheduleForm] = useState(false)
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", formData)
-  }
+    setIsSubmitting(true)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+
+    toast({
+      title: "Message Sent Successfully!",
+      description: "Thank you for contacting us. We'll get back to you within 24 hours.",
     })
+
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    })
+    setIsSubmitting(false)
   }
 
-  const handleScheduleCall = () => {
-    setShowScheduleForm(true)
-  }
-
-  const contactNumbers = ["+92 310 7300166", "+92 305 9306992", "+92 321 5419491", "+92 300 9475865"]
-
-  const socialLinks = [
-    { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/Usparity", color: "hover:text-blue-600" },
-    { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/usparity/", color: "hover:text-pink-600" },
-    { name: "Twitter", icon: Twitter, href: "https://x.com/usparity", color: "hover:text-blue-400" },
+  const contactInfo = [
     {
-      name: "LinkedIn",
-      icon: Linkedin,
-      href: "https://www.linkedin.com/company/usparity/",
-      color: "hover:text-blue-700",
+      icon: Mail,
+      title: "Email Us",
+      details: ["contact@usparity.com", "support@usparity.com"],
+      description: "Send us an email anytime",
+    },
+    {
+      icon: Phone,
+      title: "Call Us",
+      details: ["+92 310 7300166", "+92 321 5419491", "+92 305 9306992", "+92 300 9475865"],
+      description: "Available Monday to Friday",
+    },
+    {
+      icon: MapPin,
+      title: "Visit Us",
+      details: ["Lahore, Punjab", "Pakistan"],
+      description: "Our main office location",
+    },
+    {
+      icon: Clock,
+      title: "Business Hours",
+      details: ["Mon - Fri: 9:00 AM - 6:00 PM", "Sat: 10:00 AM - 4:00 PM"],
+      description: "Pakistan Standard Time (PST)",
     },
   ]
 
   return (
-    <section className="hero-full-height deep-gradient-enhanced relative overflow-hidden">
-      {/* Disco dots */}
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
-      <div className="disco-dots"></div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold font-serif mb-6 animate-fade-in-up">Contact Us</h1>
+          <p className="text-xl text-purple-100 max-w-3xl mx-auto animate-fade-in-up">
+            Ready to transform your digital presence? Get in touch with our team of experts and let's discuss how we can
+            help your business grow.
+          </p>
+        </div>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex items-center">
-        <div className="w-full">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8 animate-fade-in-up">
-              <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-              Let's Start Your Digital Journey
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight animate-fade-in-up">
-              Ready to{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">
-                Connect?
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-xl md:text-2xl lg:text-3xl text-white/90 mb-10 leading-relaxed max-w-4xl mx-auto animate-fade-in-up">
-              Ready to elevate your brand? Reach out to the Usparity team today and let's collaborate on your next
-              digital success story.
-            </p>
-
-            {/* Social Proof */}
-            <div className="flex flex-wrap justify-center items-center gap-8 mb-16 text-sm text-white/80 animate-fade-in-up">
-              <div className="flex items-center hover:text-white transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
-                24/7 Support Available
-              </div>
-              <div className="flex items-center hover:text-white transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
-                Free Consultation
-              </div>
-              <div className="flex items-center hover:text-white transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
-                Quick Response Time
-              </div>
-            </div>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <Card className="border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-white/95 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-2xl font-bold text-gray-900">
-                    <Mail className="w-6 h-6 mr-3 text-purple-600" />
-                    Email Us
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">Send us an email and we'll get back to you within 24 hours.</p>
-                  <a
-                    href="mailto:contact@usparity.com"
-                    className="text-purple-600 hover:text-purple-700 font-semibold text-lg transition-colors"
-                  >
-                    contact@usparity.com
-                  </a>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-white/95 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-2xl font-bold text-gray-900">
-                    <Phone className="w-6 h-6 mr-3 text-purple-600" />
-                    Call Us
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-4">Speak directly with our team during business hours.</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {contactNumbers.map((number, index) => (
-                      <a
-                        key={index}
-                        href={`tel:${number}`}
-                        className="block text-purple-600 hover:text-purple-700 font-semibold transition-colors py-1"
-                      >
-                        {number}
-                      </a>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-white/95 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-2xl font-bold text-gray-900">
-                    <MapPin className="w-6 h-6 mr-3 text-purple-600" />
-                    Location
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-2">We're based in:</p>
-                  <p className="text-lg font-semibold text-gray-900">Lahore, Punjab, Pakistan</p>
-                </CardContent>
-              </Card>
-
-              {/* Social Media */}
-              <Card className="border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-white/95 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-gray-900">Follow Us</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-6">Stay connected with us on social media for updates and insights.</p>
-                  <div className="flex space-x-4">
-                    {socialLinks.map((social) => (
-                      <a
-                        key={social.name}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`p-3 bg-gray-100 rounded-full text-gray-600 ${social.color} transition-all duration-300 hover:transform hover:scale-110`}
-                      >
-                        <social.icon className="w-6 h-6" />
-                        <span className="sr-only">{social.name}</span>
-                      </a>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Contact Form */}
-            <div>
-              <Card className="border-0 shadow-2xl bg-white/95 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-gray-900">Send us a Message</CardTitle>
-                  <p className="text-gray-600">
-                    Fill out the form below and we'll get back to you as soon as possible.
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="fullName">Full Name *</Label>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div className="animate-slide-in-left">
+            <Card className="shadow-lg border-0">
+              <CardHeader>
+                <CardTitle className="text-2xl font-serif text-gray-900">Send us a Message</CardTitle>
+                <p className="text-gray-600">Fill out the form below and we'll get back to you as soon as possible.</p>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name *
+                      </label>
                       <Input
-                        id="fullName"
-                        name="fullName"
+                        id="name"
+                        name="name"
                         type="text"
-                        placeholder="Enter your full name"
-                        value={formData.fullName}
-                        onChange={handleChange}
                         required
-                        className="h-12 transition-all duration-300 focus:ring-2 focus:ring-purple-500"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Your full name"
+                        className="w-full"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address *
+                      </label>
                       <Input
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="Enter your email address"
+                        required
                         value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="h-12 transition-all duration-300 focus:ring-2 focus:ring-purple-500"
+                        onChange={handleInputChange}
+                        placeholder="your.email@example.com"
+                        className="w-full"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="subject">Subject *</Label>
-                      <Input
-                        id="subject"
-                        name="subject"
-                        type="text"
-                        placeholder="What's this about?"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        className="h-12 transition-all duration-300 focus:ring-2 focus:ring-purple-500"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message *</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        placeholder="Tell us about your project or how we can help you..."
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows={6}
-                        className="transition-all duration-300 focus:ring-2 focus:ring-purple-500"
-                      />
-                    </div>
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="w-full deep-gradient hover:opacity-90 h-12 text-lg font-semibold transition-all duration-300 hover:transform hover:scale-105 text-white"
-                    >
-                      <Send className="w-5 h-5 mr-2" />
-                      Send Message
-                    </Button>
-                  </form>
+                  </div>
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                      Subject *
+                    </label>
+                    <Input
+                      id="subject"
+                      name="subject"
+                      type="text"
+                      required
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      placeholder="What's this about?"
+                      className="w-full"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                      Message *
+                    </label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      required
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Tell us about your project or inquiry..."
+                      rows={6}
+                      className="w-full resize-none"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 text-lg font-medium"
+                  >
+                    {isSubmitting ? (
+                      "Sending..."
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Contact Information */}
+          <div className="animate-slide-in-right">
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Get in Touch</h2>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  We're here to help you succeed. Whether you need content writing, digital marketing, or AI-powered
+                  insights, our team is ready to discuss your project and provide tailored solutions.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-6">
+                {contactInfo.map((info, index) => (
+                  <Card key={index} className="hover-lift border-l-4 border-l-purple-600">
+                    <CardContent className="p-6">
+                      <div className="flex items-start space-x-4">
+                        <div className="bg-purple-100 p-3 rounded-lg">
+                          <info.icon className="w-6 h-6 text-purple-600" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-900 mb-1">{info.title}</h3>
+                          <div className="space-y-1">
+                            {info.details.map((detail, idx) => (
+                              <p key={idx} className="text-gray-700 font-medium">
+                                {detail}
+                              </p>
+                            ))}
+                          </div>
+                          <p className="text-gray-500 text-sm mt-2">{info.description}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Quick Response Promise */}
+              <Card className="bg-gradient-to-r from-purple-50 to-blue-50 border-purple-200">
+                <CardContent className="p-6 text-center">
+                  <h3 className="font-semibold text-gray-900 mb-2">Quick Response Guarantee</h3>
+                  <p className="text-gray-600">
+                    We typically respond to all inquiries within 2-4 hours during business hours. For urgent matters,
+                    please call us directly.
+                  </p>
                 </CardContent>
               </Card>
             </div>
           </div>
-
-          {/* Schedule Section */}
-          <div className="mt-16 text-center">
-            <Card className="max-w-2xl mx-auto bg-white/20 backdrop-blur-sm border-white/30 text-white">
-              <CardContent className="p-8">
-                <Calendar className="w-12 h-12 mx-auto mb-4 text-white" />
-                <h3 className="font-serif text-2xl font-bold mb-4">Ready to Get Started?</h3>
-                <p className="mb-6 opacity-90">
-                  Let's schedule a consultation to explore your project and how Usparity can empower your digital
-                  journey.
-                </p>
-                <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100" onClick={handleScheduleCall}>
-                  Schedule a Call
-                </Button>
-                {showScheduleForm && (
-                  <div className="mt-6 p-4 bg-white/10 rounded-lg">
-                    <p className="text-sm opacity-80">
-                      Scheduling feature coming soon! For now, please contact us directly via email or phone.
-                    </p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }

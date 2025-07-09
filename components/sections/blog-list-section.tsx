@@ -1,264 +1,333 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useRouter } from "next/navigation"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, User, Clock, ArrowRight, CheckCircle } from "lucide-react"
-import Link from "next/link"
+import { Input } from "@/components/ui/input"
+import { Calendar, Clock, User, Search, ArrowRight, Eye, MessageCircle, Heart } from "lucide-react"
 
 export function BlogListSection() {
-  const [activeCategory, setActiveCategory] = useState("All")
-  const [visiblePosts, setVisiblePosts] = useState(6)
+  const router = useRouter()
+  const [searchTerm, setSearchTerm] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("All")
 
   const blogPosts = [
     {
-      title: "The Ultimate Guide to SEO Content Writing in 2024",
+      id: "ai-content-marketing-2024",
+      title: "The Future of AI in Content Marketing: Trends for 2024",
       excerpt:
-        "Discover the latest SEO strategies and content writing techniques that will help your content rank higher in search results and drive organic traffic.",
-      category: "SEO",
-      author: "Usparity Team",
+        "Discover how artificial intelligence is revolutionizing content marketing strategies and what businesses need to know to stay competitive in the digital landscape.",
+      author: "Tahira Nawab",
       date: "2024-01-15",
       readTime: "8 min read",
+      category: "AI & Technology",
+      tags: ["AI", "Content Marketing", "Digital Strategy"],
       image: "/placeholder.svg?height=300&width=500",
-      slug: "ultimate-guide-seo-content-writing-2024",
+      views: 1250,
+      comments: 23,
+      likes: 89,
+      featured: true,
     },
     {
-      title: "How to Create Engaging Blog Content That Converts",
+      id: "seo-optimization-guide",
+      title: "Complete SEO Optimization Guide for Small Businesses",
       excerpt:
-        "Learn the secrets of creating blog content that not only engages your audience but also drives conversions and builds lasting relationships with your readers.",
-      category: "Content Strategy",
-      author: "Usparity Team",
+        "A comprehensive guide to improving your website's search engine rankings with practical tips and proven strategies that deliver real results.",
+      author: "Noor Fatima",
       date: "2024-01-12",
-      readTime: "6 min read",
+      readTime: "12 min read",
+      category: "SEO",
+      tags: ["SEO", "Digital Marketing", "Small Business"],
       image: "/placeholder.svg?height=300&width=500",
-      slug: "create-engaging-blog-content-converts",
+      views: 2100,
+      comments: 45,
+      likes: 156,
+      featured: false,
     },
     {
-      title: "Digital Marketing Trends to Watch in 2024",
+      id: "data-driven-marketing",
+      title: "How Data-Driven Marketing Can Transform Your Business",
       excerpt:
-        "Stay ahead of the curve with these emerging digital marketing trends that will shape the industry and help you reach your target audience more effectively.",
-      category: "Digital Marketing",
-      author: "Usparity Team",
+        "Learn how to leverage data analytics to create more effective marketing campaigns and make informed business decisions that drive growth.",
+      author: "Rafay Khan",
       date: "2024-01-10",
       readTime: "10 min read",
+      category: "Data Science",
+      tags: ["Data Analytics", "Marketing", "Business Intelligence"],
       image: "/placeholder.svg?height=300&width=500",
-      slug: "digital-marketing-trends-2024",
+      views: 1800,
+      comments: 34,
+      likes: 127,
+      featured: true,
     },
     {
-      title: "E-commerce Optimization: Boost Your Online Sales",
+      id: "web-design-trends-2024",
+      title: "Top Web Design Trends That Will Dominate 2024",
       excerpt:
-        "Practical strategies and techniques to optimize your e-commerce store, improve user experience, and increase conversion rates for better sales performance.",
-      category: "E-commerce",
-      author: "Usparity Team",
+        "Stay ahead of the curve with the latest web design trends, from immersive 3D experiences to minimalist interfaces that prioritize user experience.",
+      author: "Ayesha Tariq",
       date: "2024-01-08",
-      readTime: "7 min read",
+      readTime: "6 min read",
+      category: "Web Design",
+      tags: ["Web Design", "UI/UX", "Trends"],
       image: "/placeholder.svg?height=300&width=500",
-      slug: "ecommerce-optimization-boost-online-sales",
+      views: 1650,
+      comments: 28,
+      likes: 98,
+      featured: false,
     },
     {
-      title: "AI in Content Creation: Tools and Best Practices",
+      id: "ecommerce-conversion-optimization",
+      title: "E-commerce Conversion Optimization: Proven Strategies",
       excerpt:
-        "Explore how artificial intelligence is revolutionizing content creation and discover the best AI tools and practices for modern content marketers.",
-      category: "AI & Technology",
-      author: "Usparity Team",
+        "Boost your online store's performance with these conversion optimization techniques that have helped businesses increase sales by up to 40%.",
+      author: "Tahira Nawab",
       date: "2024-01-05",
       readTime: "9 min read",
+      category: "E-commerce",
+      tags: ["E-commerce", "Conversion", "Online Sales"],
       image: "/placeholder.svg?height=300&width=500",
-      slug: "ai-content-creation-tools-best-practices",
+      views: 2250,
+      comments: 52,
+      likes: 189,
+      featured: false,
     },
     {
-      title: "Social Media Marketing Strategy for Small Businesses",
+      id: "social-media-strategy-2024",
+      title: "Building a Winning Social Media Strategy in 2024",
       excerpt:
-        "A comprehensive guide to building an effective social media marketing strategy that helps small businesses grow their online presence and engage customers.",
-      category: "Social Media",
-      author: "Usparity Team",
+        "Create engaging social media campaigns that build brand awareness, drive traffic, and convert followers into loyal customers.",
+      author: "Noor Fatima",
       date: "2024-01-03",
-      readTime: "5 min read",
-      image: "/placeholder.svg?height=300&width=500",
-      slug: "social-media-marketing-strategy-small-businesses",
-    },
-    {
-      title: "Content Marketing ROI: Measuring Success",
-      excerpt:
-        "Learn how to measure and improve your content marketing ROI with proven metrics and strategies that drive business growth.",
-      category: "Content Strategy",
-      author: "Usparity Team",
-      date: "2024-01-01",
       readTime: "7 min read",
+      category: "Social Media",
+      tags: ["Social Media", "Brand Building", "Digital Marketing"],
       image: "/placeholder.svg?height=300&width=500",
-      slug: "content-marketing-roi-measuring-success",
-    },
-    {
-      title: "Advanced SEO Techniques for 2024",
-      excerpt:
-        "Master advanced SEO techniques that will help your website rank higher and attract more organic traffic in the competitive digital landscape.",
-      category: "SEO",
-      author: "Usparity Team",
-      date: "2023-12-28",
-      readTime: "12 min read",
-      image: "/placeholder.svg?height=300&width=500",
-      slug: "advanced-seo-techniques-2024",
+      views: 1950,
+      comments: 41,
+      likes: 143,
+      featured: true,
     },
   ]
 
-  const categories = [
-    "All",
-    "SEO",
-    "Content Strategy",
-    "Digital Marketing",
-    "E-commerce",
-    "AI & Technology",
-    "Social Media",
-  ]
+  const categories = ["All", "AI & Technology", "SEO", "Data Science", "Web Design", "E-commerce", "Social Media"]
 
-  const filteredPosts =
-    activeCategory === "All" ? blogPosts : blogPosts.filter((post) => post.category === activeCategory)
+  const filteredPosts = blogPosts.filter((post) => {
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory
+    return matchesSearch && matchesCategory
+  })
 
-  const displayedPosts = filteredPosts.slice(0, visiblePosts)
+  const featuredPosts = filteredPosts.filter((post) => post.featured)
+  const regularPosts = filteredPosts.filter((post) => !post.featured)
 
-  const loadMorePosts = () => {
-    setVisiblePosts((prev) => prev + 6)
+  const handleReadMore = (slug: string) => {
+    router.push(`/blog/${slug}`)
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="hero-full-height deep-gradient-enhanced relative overflow-hidden">
-        {/* Disco dots */}
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
+      <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold font-serif mb-6 animate-fade-in-up">Our Blog</h1>
+          <p className="text-xl text-purple-100 max-w-3xl mx-auto animate-fade-in-up">
+            Insights, tips, and strategies to help you succeed in the digital world. Stay updated with the latest trends
+            and best practices.
+          </p>
+        </div>
+      </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8 animate-fade-in-up">
-              <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-              Expert Insights & Industry Knowledge
+      {/* Search and Filter */}
+      <div className="py-12 bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Input
+                type="text"
+                placeholder="Search articles..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
             </div>
-
-            {/* Main Headline */}
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight animate-fade-in-up">
-              Insights That{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">
-                Drive Success
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-xl md:text-2xl lg:text-3xl text-white/90 mb-10 leading-relaxed max-w-4xl mx-auto animate-fade-in-up">
-              Explore expert-driven content, industry trends, and actionable strategies curated to inform, inspire, and
-              accelerate your digital transformation journey.
-            </p>
-
-            {/* Social Proof */}
-            <div className="flex flex-wrap justify-center items-center gap-8 mb-10 text-sm text-white/80 animate-fade-in-up">
-              <div className="flex items-center hover:text-white transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
-                50+ Expert Articles
-              </div>
-              <div className="flex items-center hover:text-white transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
-                Weekly Updates
-              </div>
-              <div className="flex items-center hover:text-white transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
-                Industry Best Practices
-              </div>
+            <div className="flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <Button
+                  key={category}
+                  variant={selectedCategory === category ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSelectedCategory(category)}
+                  className={selectedCategory === category ? "bg-purple-600 hover:bg-purple-700" : ""}
+                >
+                  {category}
+                </Button>
+              ))}
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Blog Content */}
-      <section className="section-spacing bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Categories Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <Badge
-                key={category}
-                variant={category === activeCategory ? "default" : "secondary"}
-                className={`px-4 py-2 cursor-pointer transition-colors ${
-                  category === activeCategory
-                    ? "deep-gradient text-white hover:opacity-90"
-                    : "bg-gray-200 text-gray-700 hover:bg-purple-100 hover:text-purple-700"
-                }`}
-                onClick={() => {
-                  setActiveCategory(category)
-                  setVisiblePosts(6)
-                }}
-              >
-                {category}
-              </Badge>
-            ))}
+      {/* Featured Posts */}
+      {featuredPosts.length > 0 && (
+        <div className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold font-serif text-gray-900 mb-8">Featured Articles</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {featuredPosts.map((post) => (
+                <Card key={post.id} className="hover-lift border-0 shadow-lg overflow-hidden">
+                  <div className="relative">
+                    <img src={post.image || "/placeholder.svg"} alt={post.title} className="w-full h-48 object-cover" />
+                    <Badge className="absolute top-4 left-4 bg-purple-600">Featured</Badge>
+                  </div>
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                      <div className="flex items-center">
+                        <User className="w-4 h-4 mr-1" />
+                        {post.author}
+                      </div>
+                      <div className="flex items-center">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {new Date(post.date).toLocaleDateString()}
+                      </div>
+                      <div className="flex items-center">
+                        <Clock className="w-4 h-4 mr-1" />
+                        {post.readTime}
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">{post.title}</h3>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.slice(0, 3).map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <div className="flex items-center">
+                          <Eye className="w-4 h-4 mr-1" />
+                          {post.views}
+                        </div>
+                        <div className="flex items-center">
+                          <MessageCircle className="w-4 h-4 mr-1" />
+                          {post.comments}
+                        </div>
+                        <div className="flex items-center">
+                          <Heart className="w-4 h-4 mr-1" />
+                          {post.likes}
+                        </div>
+                      </div>
+                      <Button
+                        size="sm"
+                        onClick={() => handleReadMore(post.id)}
+                        className="bg-purple-600 hover:bg-purple-700"
+                      >
+                        Read More
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
+        </div>
+      )}
 
-          {/* Blog Posts Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayedPosts.map((post, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 shadow-lg hover-lift"
-              >
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={post.image || "/placeholder.svg"}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+      {/* Regular Posts */}
+      <div className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold font-serif text-gray-900 mb-8">Latest Articles</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {regularPosts.map((post) => (
+              <Card key={post.id} className="hover-lift border-0 shadow-lg overflow-hidden">
+                <div className="relative">
+                  <img src={post.image || "/placeholder.svg"} alt={post.title} className="w-full h-48 object-cover" />
+                  <Badge className="absolute top-4 left-4 bg-white text-purple-600">{post.category}</Badge>
                 </div>
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <Badge variant="secondary" className="bg-purple-100 text-purple-700 hover:bg-purple-100">
-                      {post.category}
-                    </Badge>
-                    <div className="flex items-center text-sm text-gray-500">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                    <div className="flex items-center">
+                      <User className="w-4 h-4 mr-1" />
+                      {post.author}
+                    </div>
+                    <div className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {new Date(post.date).toLocaleDateString()}
+                    </div>
+                    <div className="flex items-center">
                       <Clock className="w-4 h-4 mr-1" />
                       {post.readTime}
                     </div>
                   </div>
-                  <CardTitle className="text-xl font-bold group-hover:text-purple-600 transition-colors leading-tight">
-                    {post.title}
-                  </CardTitle>
-                  <CardDescription className="text-gray-600 leading-relaxed">{post.excerpt}</CardDescription>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">{post.title}</h3>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <div className="flex items-center text-sm text-gray-500 mb-4">
-                    <User className="w-4 h-4 mr-2" />
-                    <span className="mr-4">{post.author}</span>
-                    <Calendar className="w-4 h-4 mr-2" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                  <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {post.tags.slice(0, 3).map((tag) => (
+                      <Badge key={tag} variant="secondary" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
                   </div>
-                  <Link href={`/blog/${post.slug}`}>
-                    <div className="flex items-center text-purple-600 hover:text-purple-700 font-semibold transition-colors cursor-pointer">
-                      Read More
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <div className="flex items-center">
+                        <Eye className="w-4 h-4 mr-1" />
+                        {post.views}
+                      </div>
+                      <div className="flex items-center">
+                        <MessageCircle className="w-4 h-4 mr-1" />
+                        {post.comments}
+                      </div>
+                      <div className="flex items-center">
+                        <Heart className="w-4 h-4 mr-1" />
+                        {post.likes}
+                      </div>
                     </div>
-                  </Link>
+                    <Button
+                      size="sm"
+                      onClick={() => handleReadMore(post.id)}
+                      className="bg-purple-600 hover:bg-purple-700"
+                    >
+                      Read More
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-
-          {/* Load More Button */}
-          {visiblePosts < filteredPosts.length && (
-            <div className="text-center mt-12">
-              <button
-                onClick={loadMorePosts}
-                className="px-8 py-3 deep-gradient text-white rounded-lg hover:opacity-90 transition-all font-semibold"
-              >
-                Load More Articles
-              </button>
-            </div>
-          )}
         </div>
-      </section>
-    </>
+      </div>
+
+      {/* Newsletter Subscription */}
+      <div className="py-16 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold font-serif mb-6">Stay Updated with Our Latest Insights</h2>
+          <p className="text-xl text-purple-100 mb-8 max-w-3xl mx-auto">
+            Subscribe to our newsletter and never miss out on the latest trends, tips, and strategies in digital
+            marketing and technology.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <Input type="email" placeholder="Enter your email address" className="bg-white text-gray-900 border-0" />
+            <Button size="lg" variant="secondary" className="bg-white text-purple-600 hover:bg-gray-100">
+              Subscribe
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }

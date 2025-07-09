@@ -1,23 +1,13 @@
-import { useToast as useUiToast } from "@/components/ui/use-toast";
+// hooks/use-toast.ts
+import { useState } from "react"
 
 export function useToast() {
-  const { toast } = useUiToast();
+  const [toasts, setToasts] = useState<any[]>([])
 
-  const showToast = ({
-    title,
-    description,
-    variant = "default",
-  }: {
-    title?: string;
-    description?: string;
-    variant?: "default" | "destructive" | string;
-  }) => {
-    toast({
-      title,
-      description,
-      variant,
-    });
-  };
+  const toast = ({ title, description }: { title: string; description: string }) => {
+    console.log(`Toast: ${title} - ${description}`)
+    // You can implement actual toast functionality here
+  }
 
-  return { toast: showToast };
+  return { toast, toasts }
 }

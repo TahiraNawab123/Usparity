@@ -1,240 +1,389 @@
-import { Card, CardContent } from "@/components/ui/card"
+"use client"
+
+import React from "react"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { PenTool, Search, TrendingUp, Zap, Check, CheckCircle } from "lucide-react"
-import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card"
+import {
+  PenTool,
+  Search,
+  Globe,
+  Smartphone,
+  BarChart3,
+  Brain,
+  ShoppingCart,
+  Mail,
+  CheckCircle,
+  ArrowRight,
+  Star,
+  Users,
+  Clock,
+  Award,
+} from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export function ServicesDetailSection() {
+  const [activeService, setActiveService] = useState(0)
+  const router = useRouter()
+
   const services = [
     {
       id: "content-writing",
-      icon: PenTool,
       title: "Content Writing",
-      description: "Professional content writing services that engage your audience and drive results.",
+      icon: PenTool,
+      image: "/placeholder.svg?height=400&width=600",
+      shortDescription: "Professional content that engages, informs, and converts your audience.",
+      fullDescription:
+        "Our expert writers create compelling, SEO-optimized content that resonates with your target audience and drives meaningful engagement. From blog posts to website copy, we ensure every word serves your business goals.",
       features: [
         "SEO-optimized blog posts and articles",
         "Website copy and landing pages",
+        "Product descriptions and reviews",
         "Social media content",
-        "Email newsletters and campaigns",
-        "Product descriptions",
-        "Technical writing and documentation",
+        "Email marketing campaigns",
+        "Technical documentation",
       ],
-      benefits: [
-        "Increased organic traffic",
-        "Higher engagement rates",
-        "Improved brand authority",
-        "Better conversion rates",
+      pricing: "Starting from $50/article",
+      deliveryTime: "2-5 business days",
+      includes: ["Keyword research", "SEO optimization", "Unlimited revisions", "Plagiarism check"],
+    },
+    {
+      id: "seo-optimization",
+      title: "SEO Optimization",
+      icon: Search,
+      image: "/placeholder.svg?height=400&width=600",
+      shortDescription: "Boost your search rankings and drive organic traffic to your website.",
+      fullDescription:
+        "Our comprehensive SEO strategies help your business rank higher in search results, attract qualified leads, and increase organic traffic through proven optimization techniques.",
+      features: [
+        "Keyword research and analysis",
+        "On-page SEO optimization",
+        "Technical SEO audits",
+        "Link building strategies",
+        "Local SEO optimization",
+        "Performance tracking and reporting",
       ],
-      deliverables: "High-quality, original content delivered on time with unlimited revisions until satisfaction.",
-      available: true,
+      pricing: "Starting from $500/month",
+      deliveryTime: "Results in 3-6 months",
+      includes: ["Monthly reports", "Keyword tracking", "Competitor analysis", "Technical support"],
+    },
+    {
+      id: "web-development",
+      title: "Web Development",
+      icon: Globe,
+      image: "/placeholder.svg?height=400&width=600",
+      shortDescription: "Custom websites that are fast, responsive, and conversion-focused.",
+      fullDescription:
+        "We build modern, responsive websites that not only look great but also perform exceptionally. Our development process focuses on user experience, speed, and conversion optimization.",
+      features: [
+        "Responsive web design",
+        "E-commerce development",
+        "CMS integration",
+        "Performance optimization",
+        "Security implementation",
+        "Ongoing maintenance",
+      ],
+      pricing: "Starting from $2,000",
+      deliveryTime: "4-8 weeks",
+      includes: ["Mobile optimization", "SSL certificate", "Basic SEO setup", "3 months support"],
+    },
+    {
+      id: "mobile-apps",
+      title: "Mobile App Development",
+      icon: Smartphone,
+      image: "/placeholder.svg?height=400&width=600",
+      shortDescription: "Native and cross-platform mobile applications for iOS and Android.",
+      fullDescription:
+        "Transform your business with custom mobile applications that provide seamless user experiences across all devices and platforms.",
+      features: [
+        "iOS and Android development",
+        "Cross-platform solutions",
+        "UI/UX design",
+        "App store optimization",
+        "Push notifications",
+        "Analytics integration",
+      ],
+      pricing: "Starting from $5,000",
+      deliveryTime: "8-16 weeks",
+      includes: ["App store submission", "User testing", "Documentation", "6 months support"],
     },
     {
       id: "digital-marketing",
-      icon: Search,
       title: "Digital Marketing",
-      description: "Comprehensive digital marketing strategies to grow your online presence and reach.",
+      icon: BarChart3,
+      image: "/placeholder.svg?height=400&width=600",
+      shortDescription: "Comprehensive digital marketing strategies that drive growth.",
+      fullDescription:
+        "Our data-driven marketing approach helps you reach the right audience, increase brand awareness, and drive conversions across all digital channels.",
       features: [
-        "Social media marketing and management",
-        "Pay-per-click (PPC) advertising",
+        "Social media marketing",
+        "Pay-per-click advertising",
         "Email marketing campaigns",
-        "Search engine optimization (SEO)",
         "Content marketing strategy",
-        "Analytics and performance tracking",
+        "Influencer partnerships",
+        "Marketing automation",
       ],
-      benefits: [
-        "Increased brand visibility",
-        "Higher quality leads",
-        "Better ROI on marketing spend",
-        "Data-driven decision making",
-      ],
-      deliverables: "Complete marketing campaigns with detailed analytics, monthly reports, and ongoing optimization.",
-      available: false,
-    },
-    {
-      id: "ecommerce-solutions",
-      icon: TrendingUp,
-      title: "E-commerce Solutions",
-      description: "Complete e-commerce support from store setup to optimization and growth.",
-      features: [
-        "E-commerce store setup and design",
-        "Product catalog optimization",
-        "Payment gateway integration",
-        "Inventory management systems",
-        "Conversion rate optimization",
-        "Mobile commerce optimization",
-      ],
-      benefits: [
-        "Increased online sales",
-        "Better user experience",
-        "Streamlined operations",
-        "Mobile-friendly shopping",
-      ],
-      deliverables: "Fully functional e-commerce store with optimized product listings and integrated payment systems.",
-      available: false,
+      pricing: "Starting from $1,000/month",
+      deliveryTime: "Ongoing campaigns",
+      includes: ["Strategy development", "Campaign management", "Performance reporting", "Monthly optimization"],
     },
     {
       id: "ai-insights",
-      icon: Zap,
       title: "AI-Powered Insights",
-      description: "Leverage artificial intelligence to gain valuable insights and optimize your strategy.",
+      icon: Brain,
+      image: "/placeholder.svg?height=400&width=600",
+      shortDescription: "Leverage artificial intelligence to gain competitive advantages.",
+      fullDescription:
+        "Harness the power of AI to analyze data, predict trends, and make informed business decisions that drive growth and efficiency.",
       features: [
-        "Data analysis and interpretation",
+        "Data analysis and visualization",
         "Predictive analytics",
-        "Performance tracking and monitoring",
+        "Customer behavior insights",
+        "Market trend analysis",
         "Automated reporting",
-        "Strategy optimization recommendations",
-        "Competitive analysis",
+        "AI chatbot development",
       ],
-      benefits: ["Data-driven decisions", "Improved performance", "Competitive advantage", "Automated insights"],
-      deliverables: "Comprehensive analytics reports with actionable insights and strategic recommendations.",
-      available: true,
+      pricing: "Starting from $1,500/month",
+      deliveryTime: "2-4 weeks setup",
+      includes: ["Custom dashboard", "Training sessions", "Data integration", "Ongoing support"],
+    },
+    {
+      id: "ecommerce",
+      title: "E-commerce Solutions",
+      icon: ShoppingCart,
+      image: "/placeholder.svg?height=400&width=600",
+      shortDescription: "Complete e-commerce platforms that drive sales and growth.",
+      fullDescription:
+        "Build a powerful online store with our comprehensive e-commerce solutions, designed to maximize conversions and provide exceptional shopping experiences.",
+      features: [
+        "Custom e-commerce development",
+        "Payment gateway integration",
+        "Inventory management",
+        "Order processing automation",
+        "Customer account portals",
+        "Analytics and reporting",
+      ],
+      pricing: "Starting from $3,000",
+      deliveryTime: "6-12 weeks",
+      includes: ["Payment setup", "SSL security", "Mobile optimization", "Training and support"],
+    },
+    {
+      id: "email-marketing",
+      title: "Email Marketing",
+      icon: Mail,
+      image: "/placeholder.svg?height=400&width=600",
+      shortDescription: "Targeted email campaigns that nurture leads and drive conversions.",
+      fullDescription:
+        "Create personalized email marketing campaigns that build relationships with your audience and drive consistent revenue growth.",
+      features: [
+        "Email campaign design",
+        "List segmentation",
+        "Automated workflows",
+        "A/B testing",
+        "Performance analytics",
+        "CRM integration",
+      ],
+      pricing: "Starting from $300/month",
+      deliveryTime: "1-2 weeks setup",
+      includes: ["Template design", "List management", "Analytics dashboard", "Monthly reporting"],
     },
   ]
 
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      company: "TechStart Inc.",
+      rating: 5,
+      text: "Usparity transformed our online presence completely. Their content writing and SEO services helped us increase organic traffic by 300%.",
+    },
+    {
+      name: "Michael Chen",
+      company: "E-commerce Plus",
+      rating: 5,
+      text: "The web development team delivered exactly what we needed. Our new website is fast, beautiful, and converts visitors into customers.",
+    },
+    {
+      name: "Emily Rodriguez",
+      company: "Digital Agency",
+      rating: 5,
+      text: "Their AI-powered insights have given us a competitive edge. We can now predict market trends and make data-driven decisions.",
+    },
+  ]
+
+  const handleGetStarted = (serviceId: string) => {
+    router.push("/auth/signup")
+  }
+
+  const handleContactUs = () => {
+    router.push("/contact")
+  }
+
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="hero-full-height deep-gradient-enhanced relative overflow-hidden">
-        {/* Disco dots */}
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-        <div className="disco-dots"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8 animate-fade-in-up">
-              <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-              Comprehensive Digital Solutions
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight animate-fade-in-up">
-              Transform Your Business with{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-blue-300">
-                Expert Services
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-xl md:text-2xl lg:text-3xl text-white/90 mb-10 leading-relaxed max-w-4xl mx-auto animate-fade-in-up">
-              From premium content writing to AI-powered insights, our comprehensive suite of services is designed to
-              elevate your brand and drive measurable results in the digital landscape.
-            </p>
-
-            {/* Social Proof */}
-            <div className="flex flex-wrap justify-center items-center gap-8 mb-10 text-sm text-white/80 animate-fade-in-up">
-              <div className="flex items-center hover:text-white transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />4 Core Service Areas
-              </div>
-              <div className="flex items-center hover:text-white transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
-                Expert Team Available
-              </div>
-              <div className="flex items-center hover:text-white transition-colors">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
-                Tailored Solutions
-              </div>
-            </div>
-          </div>
+      <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold font-serif mb-6 animate-fade-in-up">Our Services</h1>
+          <p className="text-xl text-purple-100 max-w-3xl mx-auto animate-fade-in-up">
+            Comprehensive digital solutions designed to accelerate your business growth and maximize your online
+            potential.
+          </p>
         </div>
-      </section>
+      </div>
 
-      {/* Services Content */}
-      <section className="section-spacing bg-white">
+      {/* Services Grid */}
+      <div className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {services.map((service, index) => (
-              <div key={service.id} id={service.id} className="scroll-mt-20 relative">
-                {!service.available && (
-                  <Badge className="absolute -top-4 left-4 bg-orange-500 text-white hover:bg-orange-500 z-10">
-                    Coming Soon
-                  </Badge>
-                )}
-                <Card className="overflow-hidden shadow-xl border-0 hover-lift">
-                  <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? "lg:grid-flow-col-dense" : ""}`}>
-                    <div className={`p-8 lg:p-12 ${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
-                      <div className="flex items-center mb-6">
-                        <div className="w-16 h-16 deep-gradient rounded-xl flex items-center justify-center mr-4">
-                          <service.icon className="w-8 h-8 text-white" />
-                        </div>
-                        <div>
-                          <h2 className="font-serif text-3xl font-bold text-gray-900">{service.title}</h2>
-                        </div>
-                      </div>
-
-                      <p className="text-lg text-gray-600 mb-8 leading-relaxed">{service.description}</p>
-
-                      <div className="mb-8">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-4">What's Included:</h3>
-                        <ul className="space-y-3">
-                          {service.features.map((feature, featureIndex) => (
-                            <li key={featureIndex} className="flex items-start">
-                              <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                              <span className="text-gray-700">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <Button
-                        size="lg"
-                        className="deep-gradient text-white hover:opacity-90"
-                        disabled={!service.available}
-                      >
-                        {service.available ? `Get Started with ${service.title}` : "Coming Soon"}
-                      </Button>
-                    </div>
-
-                    <div
-                      className={`bg-gradient-to-br from-purple-50 to-blue-50 p-8 lg:p-12 ${index % 2 === 1 ? "lg:col-start-1" : ""}`}
-                    >
-                      <div className="h-full flex flex-col justify-center">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-6">Key Benefits:</h3>
-                        <ul className="space-y-4 mb-8">
-                          {service.benefits.map((benefit, benefitIndex) => (
-                            <li key={benefitIndex} className="flex items-center">
-                              <div className="w-2 h-2 bg-purple-500 rounded-full mr-4"></div>
-                              <span className="text-gray-700 font-medium">{benefit}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="bg-white p-6 rounded-lg shadow-sm">
-                          <h4 className="font-semibold text-gray-900 mb-2">Deliverables:</h4>
-                          <p className="text-gray-600 text-sm leading-relaxed">{service.deliverables}</p>
-                        </div>
-                      </div>
-                    </div>
+              <Card
+                key={service.id}
+                className={`cursor-pointer transition-all duration-300 hover-lift ${
+                  activeService === index ? "ring-2 ring-purple-600 shadow-lg" : ""
+                }`}
+                onClick={() => setActiveService(index)}
+              >
+                <CardContent className="p-6 text-center">
+                  <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <service.icon className="w-8 h-8 text-purple-600" />
                   </div>
-                </Card>
-              </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.title}</h3>
+                  <p className="text-gray-600 text-sm">{service.shortDescription}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
 
-          {/* CTA Section */}
-          <div className="mt-20 text-center">
-            <Card className="max-w-2xl mx-auto deep-gradient border-0 text-white">
-              <CardContent className="p-8">
-                <h3 className="font-serif text-2xl font-bold mb-4">Ready to Get Started?</h3>
-                <p className="mb-6 opacity-90">
-                  Let's discuss how our services can help elevate your brand and achieve your digital goals.
-                </p>
-                <Link href="/contact">
-                  <Button size="lg" variant="secondary" className="bg-white text-purple-600 hover:bg-gray-100">
-                    Contact Us Today
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+          {/* Active Service Details */}
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              <div className="p-8 lg:p-12">
+                <div className="flex items-center mb-6">
+                  <div className="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
+                    {React.createElement(services[activeService].icon, {
+                      className: "w-6 h-6 text-purple-600",
+                    })}
+                  </div>
+                  <h2 className="text-3xl font-bold font-serif text-gray-900">{services[activeService].title}</h2>
+                </div>
+
+                <p className="text-gray-600 text-lg mb-8 leading-relaxed">{services[activeService].fullDescription}</p>
+
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">What's Included:</h3>
+                    <div className="grid grid-cols-1 gap-3">
+                      {services[activeService].features.map((feature, index) => (
+                        <div key={index} className="flex items-center">
+                          <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                          <span className="text-gray-700">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-6 border-t border-gray-200">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center mb-2">
+                        <Award className="w-5 h-5 text-purple-600 mr-2" />
+                        <span className="font-semibold text-gray-900">Pricing</span>
+                      </div>
+                      <p className="text-purple-600 font-bold">{services[activeService].pricing}</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center mb-2">
+                        <Clock className="w-5 h-5 text-purple-600 mr-2" />
+                        <span className="font-semibold text-gray-900">Delivery</span>
+                      </div>
+                      <p className="text-gray-600">{services[activeService].deliveryTime}</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="flex items-center justify-center mb-2">
+                        <Users className="w-5 h-5 text-purple-600 mr-2" />
+                        <span className="font-semibold text-gray-900">Support</span>
+                      </div>
+                      <p className="text-gray-600">24/7 Available</p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Button
+                      size="lg"
+                      className="bg-purple-600 hover:bg-purple-700 flex-1"
+                      onClick={() => handleGetStarted(services[activeService].id)}
+                    >
+                      Get Started with {services[activeService].title}
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                    <Button size="lg" variant="outline" className="flex-1 bg-transparent" onClick={handleContactUs}>
+                      Contact Us
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 p-8 lg:p-12 flex items-center justify-center">
+                <img
+                  src={services[activeService].image || "/placeholder.svg"}
+                  alt={services[activeService].title}
+                  className="max-w-full h-auto rounded-lg shadow-lg"
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+
+      {/* Testimonials */}
+      <div className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold font-serif text-gray-900 mb-4">What Our Clients Say</h2>
+            <p className="text-xl text-gray-600">Don't just take our word for it - hear from our satisfied clients</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="hover-lift border-0 shadow-lg">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-600 mb-4 italic">"{testimonial.text}"</p>
+                  <div>
+                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
+                    <p className="text-purple-600 text-sm">{testimonial.company}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="py-16 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold font-serif mb-6">Ready to Transform Your Business?</h2>
+          <p className="text-xl text-purple-100 mb-8 max-w-3xl mx-auto">
+            Let's discuss your project and create a customized solution that drives real results for your business.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" variant="secondary" className="bg-white text-purple-600 hover:bg-gray-100">
+              Start Your Project Today
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white hover:text-purple-600 bg-transparent"
+            >
+              Schedule a Consultation
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
