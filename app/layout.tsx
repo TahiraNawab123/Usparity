@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import { AuthProvider } from "@/components/providers/auth-provider"
-import { Toaster } from "@/components/ui/toast"
+import { Toaster } from "sonner";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -62,14 +62,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+      {/* <head> */}
+        {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link 
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" 
-          rel="stylesheet" 
-        />
-      </head>
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" 
+  rel="stylesheet" 
+/>
+
+      </head> */}
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-gray-900 text-white`}>
         <AuthProvider>
           {children}
